@@ -31,7 +31,8 @@ fi
 if [[ -L "$mountPoint" && $(readlink -f "$mountPoint") == "$targetFile" ]]; then
     trace "$mountPoint already links to $targetFile, ignoring"
 elif mount | grep -F "$mountPoint"' ' >/dev/null && ! mount | grep -F "$mountPoint"/ >/dev/null; then
-    trace "mount already exists at $mountPoint, ignoring"
+    trace "mount already exists at $mountPoint, ensuring it is mounted rw"
+    mount -o remount,rw "$targetFile" "$mountPoint"
 elif [[ -e "$mountPoint" ]]; then
     echo "A file already exists at $mountPoint!" >&2
     exit 1

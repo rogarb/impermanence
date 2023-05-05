@@ -56,7 +56,7 @@ let
     value = {
       device = concatPaths [ persistentStoragePath dirPath ];
       noCheck = true;
-      options = [ "bind" ]
+      options = [ "bind" "rw" ]
         ++ optional cfg.${persistentStoragePath}.hideMounts "x-gvfs-hide";
       depends = [ persistentStoragePath ];
     };
