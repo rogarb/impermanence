@@ -56,8 +56,8 @@ if [[ ! -d "$realSource" ]]; then
     chown "$user:$group" "$realSource"
 fi
 
-# unmount target if already mounted and ro
-[[ -n "$(findmnt "$target" -O ro -y -o options)" ]] && umount "$target"
+# unmount target if already mounted
+[[ -n "$(findmnt "$target" -y)" ]] && umount "$target"
 
 [[ -d "$target" ]] || mkdir "$target"
 
